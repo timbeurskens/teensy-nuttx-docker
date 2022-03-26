@@ -1,0 +1,29 @@
+#
+# For a description of the syntax of this configuration file,
+# see the file kconfig-language.txt in the NuttX tools repository.
+#
+
+config USER_HELLO
+	tristate "\"Hello, World!\" example (user)"
+	default n
+	---help---
+		Enable the \"Hello, World!\" user example
+
+if USER_HELLO
+
+config USER_HELLO_PROGNAME
+	string "Program name"
+	default "hello_user"
+	---help---
+		This is the name of the program that will be used when the NSH ELF
+		program is installed.
+
+config USER_HELLO_PRIORITY
+	int "Hello task priority"
+	default 100
+
+config USER_HELLO_STACKSIZE
+	int "Hello stack size"
+	default DEFAULT_TASK_STACKSIZE
+
+endif
