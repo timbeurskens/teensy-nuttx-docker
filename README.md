@@ -157,3 +157,14 @@ If NuttX is configured to run the NSH terminal, first press the `Enter` key _thr
 ```
 nsh>
 ```
+
+## Utilities
+
+A number of convenience scripts are available and can be found (and modified) in the `tools` directory.
+
+After modifying the scripts, the docker image must be recompiled.
+
+- `ntxbuild`: runs `make -j8` in the nuttx dir
+- `ntxflash`: flashes the `nuttx.hex` file to teensy
+- `ntxconsole`: launches picocom
+- `ntxmenuconfig`: runs `make menuconfig` inside the nuttx dir

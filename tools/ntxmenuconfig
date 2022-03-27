@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+
+pushd /nuttxspace/nuttx
+make menuconfig
+popd

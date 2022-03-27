@@ -47,5 +47,11 @@ RUN git clone https://github.com/PaulStoffregen/teensy_loader_cli.git && \
 # add teensy loader to path
 ENV PATH="/teensy_loader_cli:${PATH}"
 
+COPY tools /nuttxspace/tools
+
+RUN chmod +x /nuttxspace/tools/*
+
+ENV PATH="/nuttxspace/tools:${PATH}"
+
 # start container with bash
 CMD /bin/bash
