@@ -118,7 +118,7 @@ The docker environment contains a mounted `user_src` directory with a `hello_use
 
 By default, the application entry-point is set to `nsh_main`. This can be modified by setting the entry point parameter in `RTOS Features > Tasks and Scheduling > Application entry point`.
 
-Alternatively you can run a start-up script in NSH. This method can be more convenient if more tasks need to be spawned in parallel.
+Alternatively you can run a start-up script in NSH. This method can be more convenient if more tasks need to be spawned in parallel. Instructions for start-up scripts can be found [here](https://nuttx.apache.org/docs/10.0.0/components/nsh/installation.html#nuttshell-start-up-scripts).
 
 ## Building and flashing
 
@@ -168,3 +168,13 @@ After modifying the scripts, the docker image must be recompiled.
 - `ntxflash`: flashes the `nuttx.hex` file to teensy
 - `ntxconsole`: launches picocom
 - `ntxmenuconfig`: runs `make menuconfig` inside the nuttx dir
+
+## Installing udev rules for Teensy 4.1
+
+Your Linux will probably restrict access to the Teensy USB interface. This repository includes a set of udev rules which can be installed on your system to elevate user permissions for the Teensy 4.1. These rules can be installed by the following command:
+
+```
+$ sudo cp 00-teensy.rules /etc/udev/rules.d/00-teensy.rules
+```
+
+To make sure the rules are loaded correctly, reboot your system before flashing or using the serial terminal.
