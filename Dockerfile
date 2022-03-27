@@ -22,21 +22,20 @@ RUN dpkg-reconfigure --frontend noninteractive tzdata
 # download & install arm toolchain
 RUN mkdir /opt/gcc && \
     cd /opt/gcc && \
-    HOST_PLATFORM=x86_64-linux && \
-    curl -L -O https://developer.arm.com/-/media/Files/downloads/gnu-rm/9-2019q4/gcc-arm-none-eabi-9-2019-q4-major-${HOST_PLATFORM}.tar.bz2 && \
-    tar xf gcc-arm-none-eabi-9-2019-q4-major-${HOST_PLATFORM}.tar.bz2 && \
-    rm gcc-arm-none-eabi-9-2019-q4-major-${HOST_PLATFORM}.tar.bz2
+    curl -L -O https://developer.arm.com/-/media/Files/downloads/gnu-rm/10.3-2021.10/gcc-arm-none-eabi-10.3-2021.10-x86_64-linux.tar.bz2 && \
+    tar xfv gcc-arm-none-eabi-10.3-2021.10-x86_64-linux.tar.bz2 && \
+    rm gcc-arm-none-eabi-10.3-2021.10-x86_64-linux.tar.bz2
 
 # add arm toolchain to path
-ENV PATH="/opt/gcc/gcc-arm-none-eabi-9-2019-q4-major/bin:${PATH}"
+ENV PATH="/opt/gcc/gcc-arm-none-eabi-10.3-2021.10/bin:${PATH}"
 
 # download & install NuttX
 RUN mkdir nuttxspace && \
     cd nuttxspace && \
     curl -L https://www.apache.org/dyn/closer.lua/incubator/nuttx/10.2.0/apache-nuttx-10.2.0-incubating.tar.gz?action=download -o nuttx.tar.gz && \
     curl -L https://www.apache.org/dyn/closer.lua/incubator/nuttx/10.2.0/apache-nuttx-apps-10.2.0-incubating.tar.gz?action=download -o apps.tar.gz && \
-    tar zxf nuttx.tar.gz && \
-    tar zxf apps.tar.gz && \
+    tar zxfv nuttx.tar.gz && \
+    tar zxfv apps.tar.gz && \
     rm nuttx.tar.gz apps.tar.gz
 
 # build the teensy-loader-cli application for flashing binaries to teensy
