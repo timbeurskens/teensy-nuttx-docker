@@ -118,6 +118,8 @@ The docker environment contains a mounted `user_src` directory with a `hello_use
 
 By default, the application entry-point is set to `nsh_main`. This can be modified by setting the entry point parameter in `RTOS Features > Tasks and Scheduling > Application entry point`.
 
+Alternatively you can run a start-up script in NSH. This method can be more convenient if more tasks need to be spawned in parallel.
+
 ## Building and flashing
 
 To compile your application, enter the nuttx directory and run the make command.
