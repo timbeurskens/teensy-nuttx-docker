@@ -178,3 +178,15 @@ $ sudo cp 00-teensy.rules /etc/udev/rules.d/00-teensy.rules
 ```
 
 To make sure the rules are loaded correctly, reboot your system before flashing or using the serial terminal.
+
+## Running from file-system
+
+[documentation](https://cwiki.apache.org/confluence/pages/viewpage.action?pageId=139629542)
+
+The documentation is outdated, the following adjustments must be made:
+
+- use `gnu-elf.ld` in `nuttx-export-10.2.0/scripts/gnu-elf.ld`
+- use `Make.defs` in `nuttx-export-10.2.0/scripts/Make.defs`
+
+At the moment, out-of-context builds do not yet work for this configuration: loading the elf file from a file system results in a system crash.
+The firmware version is tightly coupled to the module version, so make sure the export is updated for new bsp versions.
