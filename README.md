@@ -1,5 +1,8 @@
 # Getting started with Teensy NuttX
 
+This guide assumes the user has access to a host pc running Ubuntu 20.04 (or similar).
+As most of the development environment is running inside a Docker container, it should be possible to use a [Windows host environment](https://ubuntu.com/tutorials/windows-ubuntu-hyperv-containers#1-overview).
+
 ## Setting up Docker
 
 These instructions can also be found [here](https://docs.docker.com/engine/install/ubuntu/).
