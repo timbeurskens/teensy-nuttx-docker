@@ -15,7 +15,7 @@ $ sudo apt-get remove docker docker-engine docker.io containerd runc
 
 Then install the prerequisites
 
-```
+```bash
 $ sudo apt-get update
 
 $ sudo apt-get install \
@@ -167,7 +167,7 @@ A number of convenience scripts are available and can be found (and modified) in
 
 After modifying the scripts, the docker image must be recompiled.
 
-- `ntxbuild`: runs `make -j8` in the nuttx dir
+- `ntxmake`: runs `make -j8 ...` in the nuttx dir
 - `ntxflash`: flashes the `nuttx.hex` file to teensy
 - `ntxconsole`: launches picocom
 - `ntxmenuconfig`: runs `make menuconfig` inside the nuttx dir
@@ -182,7 +182,9 @@ $ sudo cp 00-teensy.rules /etc/udev/rules.d/00-teensy.rules
 
 To make sure the rules are loaded correctly, reboot your system before flashing or using the serial terminal.
 
-## Running from file-system
+## Misc.
+
+### Running from file-system
 
 [documentation](https://cwiki.apache.org/confluence/pages/viewpage.action?pageId=139629542)
 
@@ -193,3 +195,17 @@ The documentation is outdated, the following adjustments must be made:
 
 At the moment, out-of-context builds do not yet work for this configuration: loading the elf file from a file system results in a system crash.
 The firmware version is tightly coupled to the module version, so make sure the export is updated for new bsp versions.
+
+### SLCAN: CAN over USB Serial
+
+Make sure to install `can-utils` on your host device:
+
+```bash
+sudo apt install can-utils
+```
+
+[some documentation](https://python-can.readthedocs.io/en/master/interfaces/serial.html)
+
+### View Kconfig diffs
+
+The `kconfig-diff` utility can be used to compare `.config` revisions.

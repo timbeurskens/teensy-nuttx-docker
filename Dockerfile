@@ -15,7 +15,7 @@ RUN DEBIAN_FRONTEND=noninteractive \
     libexpat-dev gcc-multilib g++-multilib picocom u-boot-tools util-linux \
     kconfig-frontends libusb-dev \
     ca-certificates \
-    nano vim zip
+    nano vim zip unzip
 
 # configure tzdata package
 RUN dpkg-reconfigure --frontend noninteractive tzdata
