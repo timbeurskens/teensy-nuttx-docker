@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
 
 pushd /nuttxspace/nuttx
-make -j8
+make -j8 $@
 popd

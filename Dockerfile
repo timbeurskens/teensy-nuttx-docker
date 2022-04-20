@@ -53,5 +53,10 @@ RUN chmod +x /nuttxspace/tools/*
 
 ENV PATH="/nuttxspace/tools:${PATH}"
 
+# install x11 tools for simulation
+RUN DEBIAN_FRONTEND=noninteractive \
+    apt install -y --no-install-recommends \
+    libx11-dev libxext-dev
+
 # start container with bash
 CMD /bin/bash
