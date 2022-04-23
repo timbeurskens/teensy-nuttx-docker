@@ -248,9 +248,24 @@ $ sudo kmodsign sha512 \
 	$PWD/supercan_usb.ko
 ```
 
-Load the kernel module:
+Load the kernel module (repeat after every reboot):
 
 ```bash
 $ sudo modprobe can-dev
 $ sudo rmmod supercan_usb 2>/dev/null || true && sudo insmod $PWD/supercan_usb.ko
+```
+
+When the device is connected you should see two CAN devices in the interface list:
+
+```bash
+$ ip link show
+```
+
+CAN0 is attached to the CAN-FD bus and CAN1 is the CAN interface we recommend using for the project.
+The vehicle uses a CAN bitrate of 500 kbit/s. You can set-up the device using the following commands:
+
+```bash
+$ sudo ip link set can1 type can bitrate 500000
+$ sudo ip link set up can1
+$ sudo ifconfig can1 txqueuelen 1000
 ```
