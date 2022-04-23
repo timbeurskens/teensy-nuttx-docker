@@ -209,3 +209,48 @@ sudo apt install can-utils
 ### View Kconfig diffs
 
 The `kconfig-diff` utility can be used to compare `.config` revisions.
+
+### Build SuperCAN linux kernel module
+
+Make sure you're running version 5.13 (or higher) of the linux kernel:
+
+```bash
+uname -r
+```
+
+Install dkms:
+
+```bash
+sudo apt install dkms
+```
+
+Clone SuperCAN and the linux module source code:
+
+```bash
+$ git clone --recursive git@github.com:jgressmann/supercan.git
+```
+
+Build the kernel module:
+
+```bash
+$ cd supercan
+$ ./Linux/dkms-init.sh
+$ cd Linux/supercan_usb-0.2.5
+$ make V=1 KERNELRELEASE=$(uname -r) -C /lib/modules/$(uname -r)/build M=$PWD
+```
+
+Sign the kernel module (only for your host machine, do not distribute):
+
+```bash
+$ sudo kmodsign sha512 \
+	/var/lib/shim-signed/mok/MOK.priv \
+    /var/lib/shim-signed/mok/MOK.der \
+	$PWD/supercan_usb.ko
+```
+
+Load the kernel module:
+
+```bash
+$ sudo modprobe can-dev
+$ sudo rmmod supercan_usb 2>/dev/null || true && sudo insmod $PWD/supercan_usb.ko
+```
