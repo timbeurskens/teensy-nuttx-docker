@@ -1,7 +1,9 @@
 # Getting started with Teensy NuttX
 
 This guide assumes the user has access to a host pc running Ubuntu 20.04 (or similar).
-As most of the development environment is running inside a Docker container, it should be possible to use a [Windows host environment](https://ubuntu.com/tutorials/windows-ubuntu-hyperv-containers#1-overview).
+As most of the development environment is running inside a Docker container, it _should_ be possible to use a [Windows host environment](https://ubuntu.com/tutorials/windows-ubuntu-hyperv-containers#1-overview). However, WSL uses an older version of the Linux kernel which is not supported by SuperCAN. This means you cannot use the CAN<->USB functionalities on Windows.
+
+If you are using a Windows host environment, consider using a Ubuntu VM running in [VirtualBox](https://www.virtualbox.org/). This will allow you to set-up the Teensy Docker environment, and use the SuperCAN Linux module.
 
 ## Setting up Docker
 
