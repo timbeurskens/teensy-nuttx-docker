@@ -25,7 +25,7 @@ RUN dpkg-reconfigure --frontend noninteractive tzdata
 RUN mkdir /opt/gcc && \
     cd /opt/gcc && \
     curl -L -O https://developer.arm.com/-/media/Files/downloads/gnu-rm/10.3-2021.10/gcc-arm-none-eabi-10.3-2021.10-x86_64-linux.tar.bz2 && \
-    tar xfv gcc-arm-none-eabi-10.3-2021.10-x86_64-linux.tar.bz2 && \
+    tar xf gcc-arm-none-eabi-10.3-2021.10-x86_64-linux.tar.bz2 && \
     rm gcc-arm-none-eabi-10.3-2021.10-x86_64-linux.tar.bz2
 
 # add arm toolchain to path
@@ -36,8 +36,8 @@ RUN mkdir nuttxspace && \
     cd nuttxspace && \
     curl -L https://www.apache.org/dyn/closer.lua/incubator/nuttx/10.2.0/apache-nuttx-10.2.0-incubating.tar.gz?action=download -o nuttx.tar.gz && \
     curl -L https://www.apache.org/dyn/closer.lua/incubator/nuttx/10.2.0/apache-nuttx-apps-10.2.0-incubating.tar.gz?action=download -o apps.tar.gz && \
-    tar zxfv nuttx.tar.gz && \
-    tar zxfv apps.tar.gz && \
+    tar zxf nuttx.tar.gz && \
+    tar zxf apps.tar.gz && \
     rm nuttx.tar.gz apps.tar.gz
 
 # build the teensy-loader-cli application for flashing binaries to teensy
@@ -58,6 +58,13 @@ ENV PATH="/nuttxspace/tools:${PATH}"
 RUN DEBIAN_FRONTEND=noninteractive \
     apt install -y --no-install-recommends \
     libx11-dev libxext-dev
+
+# install qt5 tools for CAN-X
+RUN DEBIAN_FRONTEND=noninteractive \
+    apt install -y --no-install-recommends \
+    libqt5charts5 libqt5serialbus5 libqt5serialbus5-plugins \
+    libqt5sql5-sqlite liblua5.3-0 \
+    iproute2 can-utils
 
 # start container with bash
 CMD /bin/bash

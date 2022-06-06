@@ -271,3 +271,24 @@ $ sudo ip link set can1 type can bitrate 500000
 $ sudo ip link set up can1
 $ sudo ifconfig can1 txqueuelen 1000
 ```
+
+### CAN playback on a virtual/physical CAN bus
+
+The latest version of the teensy-nuttx-docker container includes the `can-utils` package and all required packages for running CAN-X in Linux.
+
+You can play-back one of the provided log files with the `canplayer` tool and view real-time data in CAN-X.
+First make sure at least 1 socketcan interface is available on your host, either by connecting a teensy board with the supercan firmware (as described in the previous section) or by using a virtual can bus:
+
+```bash
+$ sudo ip link add vcan0 type vcan
+$ sudo ip link set up vcan0
+```
+
+Now start CAN-X and select either a physically connected can interface, or `vcan0`.
+In a separate terminal, start the logfile playback:
+
+```bash
+$ canplayer -I logfile.scl vcan0=canx
+```
+
+_Note: replace `vcan0` with the desired output interface, leave `canx` as is: this is the recorded interface name._
